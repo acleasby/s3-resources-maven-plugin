@@ -1,4 +1,4 @@
-package io.github.josephtaylor.maven.model;
+package com.github.acleasby.maven.model;
 
 import org.apache.maven.plugins.annotations.Parameter;
 

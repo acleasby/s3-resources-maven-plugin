@@ -1,4 +1,4 @@
-package io.github.josephtaylor.maven.mojo;
+package com.github.acleasby.maven.mojo;
 
 import org.apache.maven.plugin.testing.AbstractMojoTestCase;
 

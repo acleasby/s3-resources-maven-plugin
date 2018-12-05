@@ -1,10 +1,10 @@
-package io.github.josephtaylor.maven.factory;
+package com.github.acleasby.maven.factory;
 
+import com.github.acleasby.maven.model.Credential;
 import com.amazonaws.auth.SystemPropertiesCredentialsProvider;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
-import io.github.josephtaylor.maven.model.Credential;
 import org.codehaus.plexus.util.StringUtils;
 
 public class AmazonS3ClientFactory {

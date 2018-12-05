@@ -1,11 +1,11 @@
-package io.github.josephtaylor.maven.mojo;
+package com.github.acleasby.maven.mojo;
 
+import com.github.acleasby.maven.factory.AmazonS3ClientFactory;
+import com.github.acleasby.maven.model.Credential;
+import com.github.acleasby.maven.model.Resource;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
-import io.github.josephtaylor.maven.factory.AmazonS3ClientFactory;
-import io.github.josephtaylor.maven.model.Credential;
-import io.github.josephtaylor.maven.model.Resource;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Goal which fetches remote resources.
  */
-@Mojo(name = "fetch", defaultPhase = LifecyclePhase.PROCESS_SOURCES)
+@Mojo(name = "fetch", defaultPhase = LifecyclePhase.PROCESS_RESOURCES)
 public class FetchMojo extends AbstractMojo {
 
     @Parameter(property = "credentials")
@@ -38,6 +38,9 @@ public class FetchMojo extends AbstractMojo {
             getLog().info("Destination:\t\t\t" + resource.getDestination());
             S3Object s3Object = amazonS3.getObject(new GetObjectRequest(resource.getBucketName(), resource.getKey()));
             try {
+                if (resource.getDestination().getParent() != null && !resource.getDestination().getParentFile().exists() && !resource.getDestination().getParentFile().mkdirs()) {
+                    throw new RuntimeException("Unable to create directory " + resource.getDestination().getParent());
+                }
                 Files.copy(s3Object.getObjectContent(), resource.getDestination().toPath(),
                         StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
