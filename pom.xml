@@ -4,7 +4,7 @@
 
     <groupId>com.github.acleasby</groupId>
     <artifactId>s3-resources-maven-plugin</artifactId>
-    <version>0.3-SNAPSHOT</version>
+    <version>0.4-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
     <name>s3-resources-maven-plugin Maven Plugin</name>
